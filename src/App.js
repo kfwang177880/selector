@@ -6,12 +6,15 @@ class Selector extends Component {
     super();
     this.state = {
       selectedShape: 'square',
+      circle: 0,
+      triangle: 0,
     };
   };
   
-  selectShape = (shapeName) => {
+  selectShape = shape => {
     this.setState({
-      selectedShape: shapeName
+      selectedShape: shape,
+      [shape]: this.state[shape]+1
     })
   }
 
@@ -19,13 +22,23 @@ class Selector extends Component {
     return (
       <div className="container">
         <div className="navbar">
-          <div>Selected: </div>
-          <div>{this.state.selectedShape}</div>
-        </div> 
+          <div>Selected: 
+            <div>{this.state.selectedShape}</div>
+          </div>
+          <shpe id='to-shape' shape={this.state.selectedShape} />
+        </div>
         <div className="shape-List">
-          <Shape shape="square" selectedShape={this.selectShape} />
-          <Shape shape="circle" selectedShape={this.selectShape} />
-          <Shape shape="triangle" selectedShape={this.selectShape} />
+          <Shape shape="square" selectShape={this.selectShape} />
+          <Shape shape="circle" selectShape={this.selectShape} />
+          <Shape shape="triangle" selectShape={this.selectShape} />
+        </div>
+        <div className='footer'>
+          Triangle clicks:
+          <div>{this.state.triangle}</div>
+          Square clicks:
+          <div>{this.state.square}</div>
+          Circle clicks:
+          <div>{this.state.circle}</div>
         </div>
       </div>
     )
